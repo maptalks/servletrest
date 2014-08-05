@@ -36,7 +36,7 @@ save servletconfig.xml in the root source folder which means servletconfig.xml w
 		</servlet>
 		<!-- someone is a variable in url pattern whose value will be set to servlet instance's field with the same name "someone".-->
 		<!-- for expample,http://foo.com/foo/rest/hello/john, you can get "john" in HelloToSomeoneServlet's field someone-->
-			<servlet class="com.foo.HelloToSomeoneServlet">
+		<servlet class="com.foo.HelloToSomeoneServlet">
 			<urlpattern value="/rest/hello/{someone}"></urlpattern>
 		</servlet>
 		<!--sample end -->
