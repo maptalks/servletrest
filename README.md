@@ -5,7 +5,7 @@ A simple, light-weighted, easy-to-use restful servlet framework for JAVA.
 
 it is very simple to configure restservlet, including 2 steps:
 
-step 1: configure restservlet in web.xml to handle all the requests with a common prefix of the url, here is http://foo.com/foo/rest/*
+step 1: configure restservlet in web.xml to handle all the requests with a common prefix of the url, for example: http://foo.com/foo/rest/*
 ###
 		<servlet>
 			<servlet-name>RestServlet</servlet-name>
