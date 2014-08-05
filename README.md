@@ -26,7 +26,7 @@ step 1: configure restservlet in web.xml to handle all the requests with a commo
 		</servlet-mapping>
 step2: create some url patterns in a file named servletconfig.xml to match request url with a certain servlet class.
 save servletconfig.xml in the root source folder which means servletconfig.xml will be copied in WEB-INF/classes.
-### sample:
+### 
 		<?xml version="1.0" encoding="UTF-8"?>
 		<servlets>
 		<!--sample start -->
