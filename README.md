@@ -1,4 +1,5 @@
 restservlet
 ===========
 
-A simple, light-weighted restful servlet framework for JAVA
+A simple, light-weighted, easy-to-use restful servlet framework for JAVA.
+
