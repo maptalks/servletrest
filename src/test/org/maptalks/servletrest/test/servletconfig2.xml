@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 用户博客 -->
+<servlets>
+	<servlet class="org.maptalks.servletrest.servlets.FServlet">
+		<urlpattern value="/x/{id}/" mode="instance"/>
+		<urlpattern value="/y/{id}/a"/>
+	</servlet>
+	<servlet class="org.maptalks.servletrest.servlets.UServlet">
+		<urlpattern value="/o/{id}"/>
+	</servlet>
+</servlets>
