@@ -22,9 +22,9 @@ import javax.servlet.http.HttpServletResponse;
  * 若urlpattern中存在{return}变量定义了返回类型（json或xml）,
  * 则子servlet能够通过getConvertor和getReturnBuilder获取到相应的返回类型转换对象<br/>
  * 若urlpattern中没有定义{return}变量，则默认为json模式 /u/{id}/ /u/10000/
- * 
+ *
  * @author fuzhen
- * 
+ *
  */
 public class BaseServlet extends HttpServlet {
 
@@ -47,7 +47,7 @@ public class BaseServlet extends HttpServlet {
 
 	/**
 	 * 从httpservletrequest中取得post请求的data
-	 * 
+	 *
 	 * @param req
 	 * @return
 	 * @throws UnsupportedEncodingException
@@ -118,7 +118,7 @@ public class BaseServlet extends HttpServlet {
 
 	/**
 	 * 向输出流中写入toWrite
-	 * 
+	 *
 	 * @param toWrite
 	 * @param resp
 	 * @throws IOException
@@ -127,6 +127,7 @@ public class BaseServlet extends HttpServlet {
 			throws IOException {
 		final Writer writer = getWriter(resp);
 		writer.write(toWrite);
+		writer.flush();
 		writer.close();
 	}
 
@@ -147,7 +148,7 @@ public class BaseServlet extends HttpServlet {
 
 	/**
 	 * 读取cookie
-	 * 
+	 *
 	 * @param req
 	 * @param key
 	 * @return
@@ -168,7 +169,7 @@ public class BaseServlet extends HttpServlet {
 
 	/**
 	 * 保存cookie
-	 * 
+	 *
 	 * @param resp
 	 * @param key
 	 * @param value
@@ -191,7 +192,7 @@ public class BaseServlet extends HttpServlet {
 
 	/**
 	 * 保存cookie
-	 * 
+	 *
 	 * @param resp
 	 * @param key
 	 * @param value
@@ -217,7 +218,7 @@ public class BaseServlet extends HttpServlet {
 
 	/**
 	 * 删除所有的cookie
-	 * 
+	 *
 	 * @param req
 	 * @param resp
 	 */
