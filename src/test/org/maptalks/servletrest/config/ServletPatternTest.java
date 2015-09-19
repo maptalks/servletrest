@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import org.junit.Assert;
 import org.junit.Test;
 
+import org.maptalks.servletrest.ServletFactory;
 import org.maptalks.servletrest.config.exceptions.InvalidServletModeException;
 import org.maptalks.servletrest.servlets.UServlet;
 
@@ -81,8 +82,9 @@ public class ServletPatternTest {
 	public void testSingletonMode() {
 		final ServletPattern pattern = new ServletPattern();
 		pattern.setPattern("/u/{id}");
+        pattern.setMode(Const.SERVLET_SINGLETON_MODE);
 		pattern.setServlet(new UServlet());
-		pattern.setMode(Const.SERVLET_SINGLETON_MODE);
+
 		final HttpServlet servlet1 = pattern.getServlet("/u/111");
 		final HttpServlet servlet2 = pattern.getServlet("/u/112");
 		Assert.assertEquals(servlet1, servlet2);

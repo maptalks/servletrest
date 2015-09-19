@@ -30,7 +30,7 @@ public class ServletFactory {
 	private List<ServletPattern> servletPatterns;
 	private String configFilePath;
 	private boolean initing = false;
-	private static Map<Class, HttpServlet> singletonServlets;
+	private static Map<Class, HttpServlet> singletonServlets = new HashMap<Class, HttpServlet>();
 	private static ServletConfig servletConfig;
 
 	/**
@@ -63,7 +63,7 @@ public class ServletFactory {
 			throw new InvalidConfigPathException();
 		}
 		initing = true;
-		singletonServlets = new HashMap<Class, HttpServlet>();
+		//singletonServlets = new HashMap<Class, HttpServlet>();
 		this.configFilePath = configFilePath;
 		servletPatterns = new ArrayList<ServletPattern>();
 		ServletFactory.servletConfig = config;
@@ -112,7 +112,6 @@ public class ServletFactory {
 	/**
 	 * 取得单例的servlet
 	 * 
-	 * @param servletClassName
 	 * @return
 	 */
 	public static HttpServlet getServlet(final Class servletClass) {

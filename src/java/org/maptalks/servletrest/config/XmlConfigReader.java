@@ -51,9 +51,10 @@ public class XmlConfigReader extends DefaultHandler {
 			throws SAXException {
 		if (Const.SERVLET_NODE.equalsIgnoreCase(qName)) {
 			servletClassName = attributes.getValue("class");
-			servletMode = attributes.getValue("mode");
+
 
 		} else if (Const.PATTERN_NODE.equalsIgnoreCase(qName)) {
+            servletMode = attributes.getValue("mode");
 			servletPattern = new ServletPattern();
 			final String urlPattern = attributes.getValue("value");
 			servletPattern.setPattern(urlPattern);

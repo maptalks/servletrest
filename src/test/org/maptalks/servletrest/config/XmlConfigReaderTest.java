@@ -26,18 +26,18 @@ public class XmlConfigReaderTest {
 		Assert.assertNotNull(patterns);
 		Assert.assertEquals(3, patterns.size());
 		Assert.assertEquals("/z/{id}", patterns.get(0).getPattern());
-		Assert.assertEquals(patterns.get(0).getServletClass().getName(),
-				"FServlet");
+	Assert.assertEquals(patterns.get(0).getServletClass().getName(),
+				"org.maptalks.servletrest.servlets.FServlet");
 		Assert.assertEquals(Const.SERVLET_INSTANCE_MODE, patterns.get(0)
 				.getMode());
 		Assert.assertEquals("/b/{id}/a", patterns.get(1).getPattern());
 		Assert.assertEquals(patterns.get(1).getServletClass().getName(),
-				"FServlet");
+				"org.maptalks.servletrest.servlets.FServlet");
 		Assert.assertEquals(Const.SERVLET_INSTANCE_MODE, patterns.get(1)
 				.getMode());
 		Assert.assertEquals("/u/{id}", patterns.get(2).getPattern());
 		Assert.assertEquals(patterns.get(2).getServletClass().getName(),
-				"UServlet");
+				"org.maptalks.servletrest.servlets.UServlet");
 		Assert.assertEquals(Const.SERVLET_INSTANCE_MODE, patterns.get(2)
 				.getMode());
 	}
