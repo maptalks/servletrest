@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.maptalks</groupId>
   <artifactId>servletrest</artifactId>
-  <version>0.3.3</version>
+  <version>0.3.4-SNAPSHOT</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,7 +14,7 @@
     <connection>scm:git:https://github.com/MapTalks/restservlet</connection>
     <developerConnection>scm:git:git@github.com:MapTalks/restservlet.git</developerConnection>
     <url>https://github.com/MapTalks/restservlet</url>
-    <tag>servletrest-0.3.3</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
