@@ -43,8 +43,11 @@ save servletconfig.xml in the root source folder which means servletconfig.xml w
 		</servlets>
 
 To make a release (like deploying to remote/local repo, making tag, etc...), run following:
-	mvn release:prepare
-	mvn release:perform
+```
+mvn release:prepare
+mvn release:perform
+```
+
 see: 
 http://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html
 http://maven.apache.org/maven-release/maven-release-plugin/examples/perform-release.html
