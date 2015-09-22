@@ -83,14 +83,8 @@
     <repository>
       <id>github.local.releases</id>
       <name>Local Release Repository</name>
-      <url>file://${mvn.repo.base}/releases</url>
+      <url>file://${mvn.repo.base}/</url>
     </repository>
-
-    <snapshotRepository>
-      <id>github.local.snapshots</id>
-      <name>Local Snapshot Repository</name>
-      <url>file://${mvn.repo.base}/snapshots</url>
-    </snapshotRepository>
 
   </distributionManagement>
 
