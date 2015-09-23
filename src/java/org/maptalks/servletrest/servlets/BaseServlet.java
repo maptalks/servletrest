@@ -9,6 +9,7 @@ import java.io.Writer;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletException;
@@ -55,26 +56,22 @@ public class BaseServlet extends HttpServlet {
 	 */
 	public Map<String, String> getPostParameters(final HttpServletRequest req)
 			throws IOException {
-		//		StringBuilder rawPostDataBuilder = new StringBuilder();
-		//		postData = new HashMap<String, String>();
-		//		Enumeration<String> e = req.getParameterNames();
-		//		String parameterName, parameterValue;
-		//		while (e.hasMoreElements()) {
-		//			parameterName = e.nextElement();
-		//			parameterValue = req.getParameter(parameterName);
-		//			postData.put(parameterName, parameterValue);
-		//			rawPostDataBuilder.append(parameterName
-		//					+ "="
-		//					+ parameterValue
-		//					+ "&");
-		//		}
-		//		rawPostData = rawPostDataBuilder.toString();
-		//----------------------------------------------------------------------------------
 		Map<String, String> postData = new HashMap<String, String>();
-
+        String contentType = req.getHeader("Content-Encoding");
+        boolean gzipReader = false;
+        if (contentType != null && contentType.indexOf("gzip") > -1) {
+            gzipReader = true;
+        }
 		StringBuilder rawPostDataBuilder = new StringBuilder();
-		final BufferedReader br = new BufferedReader(new InputStreamReader(
-				req.getInputStream(), "UTF-8"));
+        BufferedReader br;
+        if (gzipReader) {
+            br = new BufferedReader(new InputStreamReader(new GZIPInputStream(
+                    req.getInputStream()) , "UTF-8"));
+        } else {
+            br = new BufferedReader(new InputStreamReader(
+                    req.getInputStream(), "UTF-8"));
+        }
+
 		String encoding = "UTF-8";
 		int temp;
 		while ((temp = br.read()) != -1) {
