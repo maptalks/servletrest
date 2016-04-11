@@ -1,6 +1,8 @@
 restservlet
 ===========
 
+[![Circle CI](https://circleci.com/gh/MapTalks/restservlet.svg?style=svg)](https://circleci.com/gh/MapTalks/restservlet)
+
 A simple, light-weighted, easy-to-use restful servlet framework for JAVA.
 
 it is very simple to configure restservlet, including 2 steps:
