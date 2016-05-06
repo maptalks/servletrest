@@ -29,21 +29,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class BaseServlet extends HttpServlet {
 
-	private boolean allowGzip = false;
+	private static String ATTRIBUTE_GZIP = "MAPTALKS-ALLOW-GZIP";
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// try {
 		final String encoding = req.getHeader("Accept-Encoding");
 		if (encoding != null && encoding.indexOf("gzip") != -1) {
-			allowGzip = true;
+			req.setAttribute(ATTRIBUTE_GZIP, true);
 		}
 		super.service(req, resp);
-		// } catch (final Exception ex) {
-		// getOutputBuilder().resolveException(ex);
-		// write(outputBuilder.toResult(), resp);
-		// }
 	}
 
 	/**
@@ -79,8 +74,6 @@ public class BaseServlet extends HttpServlet {
 		}
 		br.close();
 		String rawPostData = rawPostDataBuilder.toString();
-		//		if (rawPostDataBuilder.length()==0)
-		//			return postData;
 		String[] params = rawPostData.split("&");
 		for (int i = 0; i < params.length; i++) {
 			String parameter = params[i];
@@ -130,9 +123,7 @@ public class BaseServlet extends HttpServlet {
 
 	protected Writer getWriter(final HttpServletResponse resp)
 			throws IOException {
-		//		if (writer != null)
-		//			return writer;
-		if (allowGzip) {
+		if (req.getAttribute(ATTRIBUTE_GZIP) != null) {
 			resp.setHeader("Content-Encoding", "gzip");
 			Writer writer = new OutputStreamWriter(new GZIPOutputStream(
 					resp.getOutputStream()), "UTF-8");
