@@ -113,15 +113,15 @@ public class BaseServlet extends HttpServlet {
 	 * @param resp
 	 * @throws IOException
 	 */
-	protected void writeResp(String toWrite, HttpServletResponse resp)
+	protected void writeResp(String toWrite, final HttpServletRequest req, final HttpServletResponse resp)
 			throws IOException {
-		final Writer writer = getWriter(resp);
+		final Writer writer = getWriter(req, resp);
 		writer.write(toWrite);
 		writer.flush();
 		writer.close();
 	}
 
-	protected Writer getWriter(final HttpServletResponse resp)
+	protected Writer getWriter(final HttpServletRequest req, final HttpServletResponse resp)
 			throws IOException {
 		if (req.getAttribute(ATTRIBUTE_GZIP) != null) {
 			resp.setHeader("Content-Encoding", "gzip");
