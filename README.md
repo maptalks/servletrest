@@ -1,7 +1,7 @@
-restservlet
+servletrest
 ===========
 
-[![Circle CI](https://circleci.com/gh/MapTalks/restservlet.svg?style=svg)](https://circleci.com/gh/MapTalks/restservlet)
+[![Circle CI](https://circleci.com/gh/MapTalks/servletrest.svg?style=svg)](https://circleci.com/gh/MapTalks/servletrest)
 
 A simple, light-weighted, easy-to-use restful servlet framework for JAVA.
 
@@ -44,12 +44,3 @@ save servletconfig.xml in the root source folder which means servletconfig.xml w
 		<!--sample end -->
 		</servlets>
 
-## RELEASE
-To make a release (like deploying to remote/local repo, making tag, etc...), run following:
-```
-mvn release:prepare
-mvn release:perform
-```
-
-see: 
-[prepare](http://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html) & [perform](http://maven.apache.org/maven-release/maven-release-plugin/examples/perform-release.html)
