@@ -5,7 +5,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.maptalks.servletrest.config.Util;
 import org.maptalks.servletrest.config.exceptions.InvalidURLPatternException;
 
@@ -51,6 +50,7 @@ public class UtilTest {
 		}
 		Assert.assertEquals(1, Util.checkPattern("/{id}/u/"));
 		Assert.assertEquals(2, Util.checkPattern("/{id}/u/{weiboid}"));
+		Assert.assertEquals(3, Util.checkPattern("/image/{width}-{height}/{name}.png"));
 	}
 
 	@Test
@@ -60,13 +60,7 @@ public class UtilTest {
 		assertEquals(1, Util.comparePattern("/u/{id}/a", "/u/"));
 		assertEquals(1, Util.comparePattern("/u/{id}/a", "/u/{id}/"));
 		assertEquals(1, Util.comparePattern("/u/{id}/a", "/l/{id}/"));
-		//		try {
 		assertEquals(1, Util.comparePattern("/u/{id}/a", "/u/a/"));
-		//			fail();
-		//		} catch (final Exception ex) {
-		//			Assert.assertTrue(ex instanceof InvalidURLPatternException);
-		//		}
-		//		try {
 		assertEquals(-1, Util.comparePattern(
 				"/rest/{mapDbName}/map/{reqType}/{method}",
 				"/rest/{mapDbName}/map/layer/field/{method}"));
@@ -131,13 +125,13 @@ public class UtilTest {
 		} catch (final Exception ex) {
 			Assert.assertTrue(ex instanceof InvalidURLPatternException);
 		}
-		try {//
+		try {
 			Util.validatePattern("/u/112/{var}", "/u/{id}/var", '{', '}');
 			fail();
 		} catch (final Exception ex) {
 			Assert.assertTrue(ex instanceof InvalidURLPatternException);
 		}
-		try {//
+		try {
 			Util.validatePattern("/u/112/{var}", "/u/{id}/", '{', '}');
 			fail();
 		} catch (final Exception ex) {

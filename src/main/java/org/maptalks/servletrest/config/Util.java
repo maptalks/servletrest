@@ -4,14 +4,19 @@ import org.maptalks.servletrest.config.exceptions.InvalidURLPatternException;
 
 public class Util {
 
+	static String extraPatternSeparateRegex = "[\\.-]";
+
+	private static boolean isPatternSeparateChar(char c) {
+		String patternSeparateChars = "/.-";
+		return patternSeparateChars.indexOf(c) != -1;
+	}
+
 	/**
 	 * pattern 的合法性检查:不允许连续出现{{或者}}的情况,不允许//之间为空
-	 * 
+	 *
 	 * @param pattern
-	 * @param varPrefix
-	 * @param varPostfix
-	 * @throws InvalidURLPatternException
 	 * @return 变量个数
+	 * @throws InvalidURLPatternException
 	 */
 	public static int checkPattern(final String pattern)
 			throws InvalidURLPatternException {
@@ -36,14 +41,14 @@ public class Util {
 				}
 			} else if (urlArr[i] == varPrefix) {
 				ret++;
-				if (inVar || (i > 0 && urlArr[i - 1] != '/')
+				if (inVar || (i > 0 && !isPatternSeparateChar(urlArr[i - 1]))
 						|| i == urlArr.length - 1
 						|| urlArr[i + 1] == varPostfix) {
 					throw new InvalidURLPatternException(pattern);
 				}
 				inVar = true;
 			} else if (urlArr[i] == varPostfix) {
-				if (!inVar || (i < urlArr.length - 1 && urlArr[i + 1] != '/')) {
+				if (!inVar || (i < urlArr.length - 1 && !isPatternSeparateChar(urlArr[i + 1]))) {
 					throw new InvalidURLPatternException(pattern);
 				}
 				inVar = false;
@@ -54,35 +59,31 @@ public class Util {
 
 	/**
 	 * 比较url是否符合pattern
-	 * 
+	 *
 	 * @param pattern
 	 * @param url
-	 * @param varPrefix
-	 * @param varPostfix
 	 * @return
 	 */
 	public static int comparePatternAndUrl(final String pattern,
-			final String url) {
+										   final String url) {
 		return compareWithSwitch(pattern, url, '{', '}', false);
 	}
 
 	/**
 	 * 比较两个pattern是否相同
-	 * 
+	 *
 	 * @param pattern1
 	 * @param pattern2
-	 * @param varPrefix
-	 * @param varPostfix
 	 * @return
 	 */
 	public static int comparePattern(final String pattern1,
-			final String pattern2) {
+									 final String pattern2) {
 		return compareWithSwitch(pattern1, pattern2, '{', '}', true);
 	}
 
 	/**
 	 * 比较两个pattern或一个pattern和url，isComparePattern表示是否是pattern比较
-	 * 
+	 *
 	 * @param pattern1
 	 * @param pattern2
 	 * @param varPrefix
@@ -91,8 +92,8 @@ public class Util {
 	 * @return
 	 */
 	private static int compareWithSwitch(final String pattern1,
-			final String pattern2, final char varPrefix, final char varPostfix,
-			final boolean isComparePattern) {
+										 final String pattern2, final char varPrefix, final char varPostfix,
+										 final boolean isComparePattern) {
 		if (pattern1 == null || pattern1.length() == 0) {
 			if (pattern2 == null || pattern2.length() == 0) {
 				return 0;
@@ -132,14 +133,14 @@ public class Util {
 	/**
 	 * 判断两个pattern是否有冲突即同一层级即定义变量又定义常量，如下：<br/>
 	 * /u/111111 与 /u/{id}
-	 * 
+	 *
 	 * @param pattern1
 	 * @param pattern2
 	 * @param varPrefix
 	 * @param varPostfix
 	 */
 	public static void validatePattern(final String pattern1,
-			final String pattern2, final char varPrefix, final char varPostfix) {
+									   final String pattern2, final char varPrefix, final char varPostfix) {
 		final String[] firstSegs = pattern1.split("/");
 		final String[] secSegs = pattern2.split("/");
 		/*
@@ -170,14 +171,14 @@ public class Util {
 	 * ab大于b <br/>
 	 * ab 小于 ac <br/>
 	 * a 等于 a<br/>
-	 * 
+	 *
 	 * @param str1
 	 * @param str2
 	 * @param ignoreCase
 	 * @return
 	 */
 	private static int compareString(final String str1, final String str2,
-			final boolean ignoreCase) {
+									 final boolean ignoreCase) {
 		final char[] firstChrs = str1.toCharArray();
 		final char[] secChrs = str2.toCharArray();
 		if (firstChrs.length > secChrs.length) {
@@ -203,18 +204,17 @@ public class Util {
 	 * /a/ == /a<br/>
 	 * /a/b > /a/<br/>
 	 * /a/ < /b/ <br/>
-	 * 
+	 *
 	 * @param url1
 	 * @param url2
 	 * @param ignorePrefix
 	 * @param ignorePostfix
-	 * @param compareLen
-	 *            是否比较长度，如果是，长度长的较大
+	 * @param compareLen    是否比较长度，如果是，长度长的较大
 	 * @return
 	 */
 	private static int _comparePattern(final String url1, final String url2,
-			final char ignorePrefix, final char ignorePostfix,
-			final boolean compareLen) {
+									   final char ignorePrefix, final char ignorePostfix,
+									   final boolean compareLen) {
 		if (url1 == null || url1.length() == 0) {
 			if (url2 == null || url2.length() == 0) {
 				return 0;
