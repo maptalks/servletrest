@@ -6,9 +6,8 @@ import javax.servlet.http.HttpServlet;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import org.maptalks.servletrest.ServletFactory;
 import org.maptalks.servletrest.config.exceptions.InvalidServletModeException;
+import org.maptalks.servletrest.servlets.ImageServlet;
 import org.maptalks.servletrest.servlets.UServlet;
 
 public class ServletPatternTest {
@@ -115,5 +114,19 @@ public class ServletPatternTest {
 		} catch (final InvalidServletModeException ex) {
 
 		}
+	}
+
+	@Test
+	public void testGetComplexServlet() {
+		ServletPattern pattern = new ServletPattern();
+		pattern.setPattern("/image/{width}-{height}/{name}.png");
+		pattern.setServlet(new ImageServlet());
+		HttpServlet httpServlet = pattern.getServlet("/image/1024-768/maptalks.png");
+		Assert.assertNotNull(httpServlet);
+		Assert.assertTrue(httpServlet instanceof ImageServlet);
+		ImageServlet servlet = (ImageServlet) httpServlet;
+		Assert.assertEquals("1024", servlet.getWidth());
+		Assert.assertEquals("768", servlet.getHeight());
+		Assert.assertEquals("maptalks", servlet.getName());
 	}
 }
